@@ -78,7 +78,7 @@ This project covers:
 ## Results
 
 * **K-Means Clustering:** Separated individuals into two meaningful clusters reflecting income-related patterns.
-* **Random Forest Classification:** Achieved reliable prediction performance with strong accuracy and balanced classification metrics.
+* **Random Forest Classification:** Achieved reliable prediction performance with an accuracy of 84%.
 
 ---
 
