@@ -1,74 +1,144 @@
-# Adult Census Income — ML Analysis
+# Adult Census Income – End-to-End Machine Learning Pipelines
 
-This repository contains an end-to-end exploratory and modeling notebook for the Adult Census Income dataset (predicting whether income > 50K).
-
-## Contents
-
-- `adult_census_income.ipynb` — main Jupyter notebook with data loading, cleaning, EDA, preprocessing, PCA, and a Random Forest model.
-- `adult.csv` — dataset (not tracked here if large; place the CSV at the repo root to run the notebook).
-
-## Project overview
-
-The notebook walks through:
-
-1. Loading and overview of the data
-2. Handling missing values ("?" → NA, imputation for categorical fields)
-3. Exploratory Data Analysis (education, age, hours/week, gender, correlation heatmap)
-4. Feature engineering and preprocessing (scaling numeric features, one-hot encoding categoricals via ColumnTransformer)
-5. Dimensionality reduction using PCA
-6. Model building (Random Forest) and evaluation
-7. Short clustering example (KMeans) for exploratory purposes
-
-## Quick start
-
-1. Clone the repo and place `adult.csv` at the repository root.
-2. Create a Python environment and install dependencies.
-
-PowerShell (Windows):
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt  # or install packages listed below
-```
-
-If you don't have a `requirements.txt`, install minimal packages:
-
-```powershell
-pip install numpy pandas matplotlib seaborn scikit-learn jupyterlab
-```
-
-3. Start Jupyter Lab / Notebook and open `adult_census_income.ipynb`.
-
-```powershell
-jupyter lab
-```
-
-4. Run the notebook cells in order. The EDA and modeling cells are split so you can run sections independently.
-
-## Notes on reproducibility
-
-- The notebook uses fixed random seeds for PCA and RandomForest where applicable to make results reproducible.
-- Preprocessing is implemented with a `ColumnTransformer` so it can be exported as part of a pipeline for production use.
-
-## Results
-
-The notebook prints model accuracy (Random Forest). For a submission-ready report, consider adding:
-
-- Cross-validation and hyperparameter tuning (GridSearch or RandomizedSearch)
-- Confusion matrix, precision/recall/F1, and ROC curve
-- Saved model and preprocessing pipeline (joblib)
-
-## Next steps / TODO
-
-- Add `requirements.txt` with pinned versions.
-- Add a short evaluation notebook or export visual report (HTML/PDF).
-- Improve feature engineering (interactions, target encoding where appropriate).
-
-## License
-
-This repository is provided as-is for educational and demonstration purposes.
+This project demonstrates a **complete machine learning workflow** using the [Adult Census Income dataset](https://www.kaggle.com/datasets/uciml/adult-census-income). It includes **data exploration, cleaning, feature engineering, clustering (KMeans), dimensionality reduction (PCA), and income prediction (Random Forest)** — all implemented with **scikit-learn Pipelines** for modularity and reproducibility.
 
 ---
 
-If you want, I can also create a pinned `requirements.txt`, run the notebook to capture final accuracy, or export the notebook to HTML for submission.
+## Overview
+
+The dataset provides demographic, educational, and occupational attributes for nearly 50,000 individuals, to understand patterns and predict whether an individual's income exceeds \$50K annually.
+
+This project covers:
+
+* **Exploratory Data Analysis (EDA)** to understand the dataset
+* **Preprocessing & Feature Engineering** to prepare data for modeling
+* **Clustering** using KMeans to identify groups of similar individuals
+* **Dimensionality Reduction** using PCA for visualization and improved modeling
+* **Classification** using Random Forest to predict income levels
+
+---
+
+## Dataset Details
+
+* **Source:** [Kaggle – Adult Census Income](https://www.kaggle.com/datasets/uciml/adult-census-income)
+* **Rows:** \~32,561
+* **Features:** 14 (age, education, work hours, marital status, occupation, etc.)
+* **Target Variable:** `income` (<=50K or >50K)
+
+---
+
+## Workflow
+
+### 1. Data Exploration
+
+* Loaded and inspected the dataset
+* Checked for missing values and data types
+* Reviewed feature distributions and unique value counts
+
+### 2. Data Cleaning
+
+* Removed missing values in `workclass`, `occupation`, and `native-country`
+* Handled outliers in numerical columns
+
+### 3. Exploratory Data Analysis (EDA)
+
+* Analyzed income distribution
+* Visualized categorical and numerical features against income
+* Correlation analysis among numerical variables
+
+### 4. Feature Engineering & Preprocessing
+
+* Used **ColumnTransformer** to:
+
+  * Scale numerical features with StandardScaler
+  * Encode categorical variables with OneHotEncoder
+* Applied **Principal Component Analysis (PCA)**:
+
+  * For clustering: 2 components for visualization
+  * For classification: 95% variance retained
+
+### 5. Clustering (Unsupervised Learning)
+
+* Applied KMeans clustering with optimal number of clusters (k=2)
+* Visualized clusters using PCA components
+* Analyzed clusters in relation to demographic patterns
+
+### 6. Classification (Supervised Learning)
+
+* Split the dataset into training (80%) and testing (20%) sets
+* Built a **Random Forest pipeline** (preprocessing → PCA → classifier)
+* Evaluated performance using:
+
+  * Accuracy
+  * Confusion matrix
+  * Classification report
+
+---
+
+## Results
+
+* **K-Means Clustering:** Separated individuals into two meaningful clusters reflecting income-related patterns.
+* **Random Forest Classification:** Achieved reliable prediction performance with strong accuracy and balanced classification metrics.
+
+---
+
+## Project Structure
+
+```
+.
+├── adult_census_income.ipynb   # Main notebook with pipelines
+├── README.md                   # Documentation
+├── requirements.txt            # Dependencies
+└── adult.csv                   # Dataset
+```
+
+---
+
+## Installation
+
+```bash
+# Clone repository
+git clone https://github.com/mohamed-geweida/adult-census-income-ml.git
+cd adult-census-income
+
+# (Optional) Create a virtual environment
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+---
+
+## Usage
+
+1. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/uciml/adult-census-income) and save it as `adult.csv` in the project folder.
+2. Launch the notebook:
+
+```bash
+jupyter notebook adult_census_income.ipynb
+```
+
+3. Run the cells to:
+
+   * Explore and clean the dataset
+   * Perform clustering with K-Means
+   * Train and evaluate the Random Forest classifier
+
+---
+
+## Technologies Used
+
+* Python
+* pandas, numpy
+* matplotlib, seaborn
+* scikit-learn (Pipelines, PCA, KMeans, Random Forest)
+
+---
+
+## License
+
+This project is for educational purposes only.
+
