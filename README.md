@@ -1,4 +1,4 @@
-# Adult Census Income – End-to-End Machine Learning Pipelines
+# Adult Census Income – End-to-End Machine Learning Project
 
 This project demonstrates a **complete machine learning workflow** using the [Adult Census Income dataset](https://www.kaggle.com/datasets/uciml/adult-census-income). It includes **data exploration, cleaning, feature engineering, clustering (KMeans), dimensionality reduction (PCA), and income prediction (Random Forest)** — all implemented with **scikit-learn Pipelines** for modularity and reproducibility.
 
